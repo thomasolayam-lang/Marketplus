@@ -135,7 +135,40 @@ public class Supermercado {
         return null; // Si termina el bucle y no lo encuentra, retorna null
     }
 
+    //registrar Compra
 
+    public boolean registrarCompra(Compra compra) {
+        // 1. Verificar si el cliente de la compra está registrado en el supermercado
+        Cliente cliente = compra.getCliente();
+        if (!verificarCliente(cliente.getDocumento())) {
+            System.out.println("Error: El cliente no está registrado.");
+            return false;
+        }
+
+        // 2. Verificar disponibilidad de stock para cada producto de la compra
+        for (Producto productoCompra : compra.getListaProductosC()) {
+            Producto productoInventario = buscarProducto(productoCompra.getCodigo());
+
+            // Si el producto no existe o no hay suficiente inventario
+            if (productoInventario == null || productoInventario.getCantidadDisponible() < productoCompra.getCantidadDisponible()) {
+                System.out.println("Error: Stock insuficiente para el producto " + productoCompra.getNombre());
+                return false;
+            }
+        }
+
+        // 3. Descontar la cantidad de stock del inventario general
+        for (Producto productoCompra : compra.getListaProductos()) {
+            Producto productoInventario = buscarProducto(productoCompra.getCodigo());
+            int nuevoStock = productoInventario.getCantidadDisponible() - productoCompra.getCantidadDisponible();
+            productoInventario.setCantidadDisponible(nuevoStock);
+        }
+
+        // 4. Agregar la compra a la lista personal del cliente y a la lista general del supermercado
+        cliente.agregarCompra(compra);
+        listaCompras.add(compra);
+
+        return true; // Compra procesada con éxito
+    }
 
 
 

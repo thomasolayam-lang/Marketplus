@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Compra {
 
@@ -7,6 +9,8 @@ public class Compra {
     private LocalDate fechaRealizacion;
     private Double valorTotal;
 
+    //listas
+    private List<Producto> listaProductosC;
     //relacion Compra con MetodoPago
     private MetodoPago metodoPago;
 
@@ -19,6 +23,16 @@ public class Compra {
         this.valorTotal = valorTotal;
         this.metodoPago = metodoPago;
         this.cliente = cliente;
+
+        listaProductosC= new ArrayList<>();
+    }
+
+    public List<Producto> getListaProductosC() {
+        return listaProductosC;
+    }
+
+    public void setListaProductosC(List<Producto> listaProductosC) {
+        this.listaProductosC = listaProductosC;
     }
 
     public String getCodigo() {
