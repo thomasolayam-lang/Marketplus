@@ -85,4 +85,14 @@ public class Compra {
                 ", cliente=" + cliente +
                 '}';
     }
+
+    // Método para calcular el total acumulado de los productos comprados
+    public double calcularTotal() {
+        double total = 0.0;
+        for (Producto producto : listaProductosC) {
+            total += (producto.getPrecioUnitario() * producto.getCantidadDisponible());
+
+        }
+        return total;
+    }
 }

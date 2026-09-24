@@ -75,4 +75,16 @@ public class Cliente {
                 ", listaCompras:" + listaCompras +
                 '}';
     }
+
+    // Método agregarCompra
+    public void agregarCompra(Compra compra) {
+        this.listaCompras.add(compra);
+    }
+
+    // Getter para consultar el historial completo
+    public List<Compra> getHistorialCompras() {
+        return listaCompras;
+    }
+
+
 }

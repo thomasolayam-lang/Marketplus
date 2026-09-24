@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,38 +139,84 @@ public class Supermercado {
     //registrar Compra
 
     public boolean registrarCompra(Compra compra) {
-        // 1. Verificar si el cliente de la compra está registrado en el supermercado
+        // Verifico si el cliente de la compra está registrado en el supermercado
         Cliente cliente = compra.getCliente();
         if (!verificarCliente(cliente.getDocumento())) {
             System.out.println("Error: El cliente no está registrado.");
             return false;
         }
 
-        // 2. Verificar disponibilidad de stock para cada producto de la compra
+        //  Verifico stock para cada producto de la compra
         for (Producto productoCompra : compra.getListaProductosC()) {
             Producto productoInventario = buscarProducto(productoCompra.getCodigo());
 
             // Si el producto no existe o no hay suficiente inventario
             if (productoInventario == null || productoInventario.getCantidadDisponible() < productoCompra.getCantidadDisponible()) {
-                System.out.println("Error: Stock insuficiente para el producto " + productoCompra.getNombre());
+                System.out.println("Error: cantidad insuficiente para el producto " + productoCompra.getNombre());
                 return false;
             }
         }
 
-        // 3. Descontar la cantidad de stock del inventario general
-        for (Producto productoCompra : compra.getListaProductos()) {
+        // Descontar la cantidad de stock del inventario general
+        for (Producto productoCompra : compra.getListaProductosC()) {
             Producto productoInventario = buscarProducto(productoCompra.getCodigo());
             int nuevoStock = productoInventario.getCantidadDisponible() - productoCompra.getCantidadDisponible();
             productoInventario.setCantidadDisponible(nuevoStock);
         }
+        // 5. Calcular el total de la compra antes de registrarla
+        double totalCalculado = compra.calcularTotal();
+        compra.setValorTotal(totalCalculado);
 
-        // 4. Agregar la compra a la lista personal del cliente y a la lista general del supermercado
+        // Asignar la fecha actual a la compra
+            compra.setFechaRealizacion(LocalDate.now()); // Requiere java.time.LocalDate
+
+
+        // Agrego la compra a la lista personal del cliente y a la lista general del supermercado
         cliente.agregarCompra(compra);
         listaCompras.add(compra);
 
         return true; // Compra procesada con éxito
     }
 
+    //metodo para ver el historial de un cliente
+
+    public List<Compra> consultarComprasCliente(int identificacion) {
+
+        //Buscamos al cliente en el supermercado por su documento
+        Cliente clienteEncontrado = buscarCliente(identificacion);
+
+        //Si el cliente existe, devolvemos su lista de compras
+        if (clienteEncontrado != null) {
+            return clienteEncontrado.getHistorialCompras();
+        }
+
+        // Si no existe el cliente, retornamos null o una lista vacía
+        System.out.println("Cliente no registrado en el supermercado.");
+        return null;
+    }
+
+    public Cliente buscarCliente(int documento) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getDocumento()==(documento)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+// metodo para calcular ventas diarias
+
+    public double calcularTotalVentasDelDia(LocalDate fechaConsulta) {
+        double totalVentas = 0.0;
+
+        for (Compra compra : listaCompras) {
+            // Comparamos si la fecha de la compra coincide con la fecha consultada
+            if (compra.getFechaRealizacion() != null && compra.getFechaRealizacion().equals(fechaConsulta)) {
+            totalVentas += compra.getValorTotal();
+         }
+      }
+
+    return totalVentas;
+}
 
 
 
