@@ -95,4 +95,12 @@ public class Compra {
         }
         return total;
     }
+
+    //metodo para agregar los productos en la compra
+    public void agregarProducto(Producto producto) {
+        if (producto != null) {
+            this.listaProductosC.add(producto);
+        }
+    }
+
 }
