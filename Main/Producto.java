@@ -12,13 +12,39 @@ public class Producto {
 
 
 
-    public Producto(int cantidadDisponible, Categoria categoria, String codigo, String nombre, double precioUnitario) {
+    public Producto(String nombre, String codigo, double precioUnitario, int cantidadDisponible, Categoria categoria) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.precioUnitario = precioUnitario;
         this.cantidadDisponible = cantidadDisponible;
         this.categoria = categoria;
-        this.codigo = codigo;
+
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
+
     public int getCantidadDisponible() {
         return cantidadDisponible;
     }
@@ -35,29 +61,6 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
     @Override
     public String toString() {
         return "Producto{" +
