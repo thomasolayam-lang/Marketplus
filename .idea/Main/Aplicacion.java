@@ -1,4 +1,6 @@
 public class Aplicacion {
 
-    private nombre String;
+    public static void main(String[] args){
+
+    }
 }
