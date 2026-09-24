@@ -82,4 +82,63 @@ public class Supermercado {
                 ", listaCompras:" + listaCompras +
                 '}';
     }
-}
+    // Registrar cliente
+    public boolean registrarCliente(Cliente cliente) {
+        boolean registrado = false;
+
+        // Verificamos si existe con el documento
+        boolean existe = verificarCliente(cliente.getDocumento());
+
+        // Si NO existe lo agregamos a la lista
+        if (existe == false) {
+            listaClientes.add(cliente);
+            registrado = true;
+        }
+        return registrado;
+    }
+
+    public boolean verificarCliente(int documento) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getDocumento()==(documento)) {
+                return true; // El cliente ya existe en el supermercado
+            }
+        }
+        return false;
+    }
+
+    //Registrar Producto
+
+    public boolean registrarProducto(Producto nuevoProducto) {
+        // Buscamos si el producto ya está en la lista
+        Producto productoExistente = buscarProducto(nuevoProducto.getCodigo());
+
+        //  Si ya existe, incrementamos su cantidad/stock
+        if (productoExistente != null) {
+            int cantidadActual = productoExistente.getCantidadDisponible();
+            int cantidadASumar = nuevoProducto.getCantidadDisponible();
+
+            productoExistente.setCantidadDisponible(cantidadActual + cantidadASumar);
+            return true;
+        }
+
+        // Si no existe, lo agregamos como nuevo a la lista
+        listaProductos.add(nuevoProducto);
+        return true;
+    }
+
+    public Producto buscarProducto(String codigo) {
+        for (Producto producto : listaProductos) {
+            if (producto.getCodigo().equals(codigo)) {
+                return producto; // Devuelve el objeto Producto si coincide el código
+            }
+        }
+        return null; // Si termina el bucle y no lo encuentra, retorna null
+    }
+
+
+
+
+
+
+    }
+
