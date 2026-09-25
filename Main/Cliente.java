@@ -7,13 +7,13 @@ public class Cliente {
 
     private String nombre;
     private int documento;
-    private int telefono;
+    private String telefono;
     private String correo;
 
     //creacion de lista
     private List<Compra> listaCompras;
 
-    public Cliente(String nombre, int documento, int telefono, String correo) {
+    public Cliente(String nombre, int documento, String telefono, String correo) {
         this.nombre = nombre;
         this.documento = documento;
         this.telefono = telefono;
@@ -41,11 +41,11 @@ public class Cliente {
         this.documento = documento;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -72,7 +72,7 @@ public class Cliente {
                 ", documento:" + documento +
                 ", telefono:" + telefono +
                 ", correo:'" + correo + '\'' +
-                ", listaCompras:" + listaCompras +
+                ", Cantidad de Compras:" + listaCompras.size() +
                 '}';
     }
 

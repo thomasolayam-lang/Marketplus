@@ -151,7 +151,7 @@ public class Supermercado {
             Producto productoInventario = buscarProducto(productoCompra.getCodigo());
 
             // Si el producto no existe o no hay suficiente inventario
-            if (productoInventario == null || productoInventario.getCantidadDisponible() < productoCompra.getCantidadDisponible()) {
+            if (productoInventario == null || productoInventario.getCantidadDisponible() < productoCompra.getCantidadComprada()) {
                 System.out.println("Error: cantidad insuficiente para el producto " + productoCompra.getNombre());
                 return false;
             }
@@ -160,7 +160,7 @@ public class Supermercado {
         // Descontar la cantidad de stock del inventario general
         for (Producto productoCompra : compra.getListaProductosC()) {
             Producto productoInventario = buscarProducto(productoCompra.getCodigo());
-            int nuevoStock = productoInventario.getCantidadDisponible() - productoCompra.getCantidadDisponible();
+            int nuevoStock = productoInventario.getCantidadDisponible() - productoCompra.getCantidadComprada();
             productoInventario.setCantidadDisponible(nuevoStock);
         }
         // 5. Calcular el total de la compra antes de registrarla
@@ -203,7 +203,9 @@ public class Supermercado {
         }
         return null;
     }
-// metodo para calcular ventas diarias
+
+
+// metodo para calcular ventas diarias o repórte de ventas
 
     public double calcularTotalVentasDelDia(LocalDate fechaConsulta) {
         double totalVentas = 0.0;

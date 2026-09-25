@@ -78,11 +78,12 @@ public class Compra {
     @Override
     public String toString() {
         return "Compra{" +
-                "codigo='" + codigo + '\'' +
-                ", fechaRealizacion=" + fechaRealizacion +
-                ", valorTotal=" + valorTotal +
-                ", metodoPago=" + metodoPago +
-                ", cliente=" + cliente +
+                "codigo:'" + codigo + '\'' +
+                ", fechaRealizacion:" + fechaRealizacion +
+                ", valorTotal:" + valorTotal +
+                ", metodoPago:" + metodoPago +
+                ", cliente=" + cliente.getNombre() +
+                ", numero de productos: "+ listaProductosC.size()+
                 '}';
     }
 
@@ -90,7 +91,7 @@ public class Compra {
     public double calcularTotal() {
         double total = 0.0;
         for (Producto producto : listaProductosC) {
-            total += (producto.getPrecioUnitario() * producto.getCantidadDisponible());
+            total += (producto.getPrecioUnitario() * producto.getCantidadComprada());
 
         }
         return total;

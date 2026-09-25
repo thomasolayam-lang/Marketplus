@@ -5,20 +5,27 @@ public class Producto {
     private String codigo;
     private double precioUnitario;
     private int cantidadDisponible;
-
+    private int cantidadComprada;// para diferenciar del stock y la venta
 //Relación de producto con categoría
 
     private Categoria categoria;
 
 
-
-    public Producto(String nombre, String codigo, double precioUnitario, int cantidadDisponible, Categoria categoria) {
+    public Producto(String nombre, String codigo, double precioUnitario, int cantidadDisponible, int cantidadComprada, Categoria categoria) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.precioUnitario = precioUnitario;
         this.cantidadDisponible = cantidadDisponible;
+        this.cantidadComprada = cantidadComprada;
         this.categoria = categoria;
+    }
 
+    public int getCantidadComprada() {
+        return cantidadComprada;
+    }
+
+    public void setCantidadComprada(int cantidadComprada) {
+        this.cantidadComprada = cantidadComprada;
     }
 
     public String getNombre() {
@@ -64,17 +71,13 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto{" +
-                "cantidadDisponible=" + cantidadDisponible +
-                ", nombre='" + nombre + '\'' +
+                "nombre='" + nombre + '\'' +
                 ", codigo='" + codigo + '\'' +
                 ", precioUnitario=" + precioUnitario +
+                ", cantidadDisponible=" + cantidadDisponible +
+                ", cantidadComprada=" + cantidadComprada +
                 ", categoria=" + categoria +
                 '}';
     }
-
-
-
-
-
 }
 
